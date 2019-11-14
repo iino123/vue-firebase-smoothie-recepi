@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import db from '../firebase/init'
 export default {
   name: 'AddSmoothie',
   data() {
@@ -35,7 +36,15 @@ export default {
   },
   methods: {
     addSmoothie() {
-      console.log(this.title, this.ingredients)
+      if(this.title){
+        this.feedback = null
+        db.collection('smoothies').add({
+          title: this.title,
+          ingredients: this.ingredients
+        })
+      }else{
+        this.feedback = 'title nonono'
+      }
     },
     addIng() {
       if(this.another) {
