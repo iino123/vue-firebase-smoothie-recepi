@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import db from '../firebase/init'
 export default {
   name: 'Index',
   data(){
@@ -24,11 +25,24 @@ export default {
   },
   methods: {
     deleteSmooThie(id) {
-      this.smoothies = this.smoothies.filter(smoothie => {
-        return smoothie.id != id
+      db.collection('smoothies').doc(id).delete()
+      .then(() => {
+        this.smoothies = this.smoothies.filter(s => {
+          return s.id != id
+        })
       })
     }
   },
+  created() {
+    db.collection('smoothies').get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        let smoothie = doc.data()
+        smoothie.id = doc.id
+        this.smoothies.push(smoothie)
+      })
+    })
+  }
 }
 </script>
 
