@@ -25,6 +25,7 @@
 </template>
 
 <script>
+// TODO: AddSmoothie.vueと処理を共通化したい。
 import db from '../firebase/init'
 import slugify from 'slugify'
 export default {
@@ -56,7 +57,6 @@ export default {
           remove: /[$*_=~.'"\-:@]/g, 
           lower: true
         })
-        debugger;
         db.collection('smoothies').doc(smoothie.id).update({
           title: smoothie.title,
           ingredients: smoothie.ingredients,
