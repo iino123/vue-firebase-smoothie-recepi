@@ -10,6 +10,7 @@
       <div v-for="(ing, index) in smoothie.ingredients" class="field ingredient" :key="index">
         <label for="ingredient">Ingredient:</label>
         <input type="text" name="ingredient" v-model="smoothie.ingredients[index]">
+        <!-- もっとナチュラルにイベントを発火したい..!!スマホだと追加できん -->
         <i class="material-icons delete" @click="deleteIng(ing)">delete</i>
       </div>
       <div class="field add-ingredient">
